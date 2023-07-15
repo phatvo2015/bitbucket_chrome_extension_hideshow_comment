@@ -1,0 +1,17 @@
+{
+  "name": "Bitbucket - Pull request Comment HideShow",
+  "version": "1.0.0",
+  "description": "Make PR comments review easier",
+  "manifest_version": 3,
+  "author": "Phat Vo",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_title": "Action Button"
+  }
+}
