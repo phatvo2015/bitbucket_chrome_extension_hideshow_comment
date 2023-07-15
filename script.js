@@ -10,7 +10,7 @@ function hideElement(element) {
 }
 
 function commentDisplayToggle() {
-    var comment_contents = this.parentElement.parentElement.parentElement.parentElement.parentElement.querySelectorAll(".ak-renderer-wrapper");
+    var comment_contents = this.querySelectorAll(".ak-renderer-wrapper");
     var first_content_display_status = comment_contents[0].style.display;
     for (var j = 0; j < comment_contents.length; j++) {
         if (first_content_display_status == "block") {
@@ -23,11 +23,11 @@ function commentDisplayToggle() {
 
 
 // Main program
-var comment_time_links = document.querySelectorAll('[href*="comment"]');
+var conversation_blocks = document.querySelectorAll('div[style*="header"]');
 
 // Inject script to list click event when user clicks on timestamp of comment
-for (var i = 0; i < comment_time_links.length; i++) {
-    comment_time_links[i].addEventListener(
+for (var i = 0; i < conversation_blocks.length; i++) {
+    conversation_blocks[i].addEventListener(
         "click",
         commentDisplayToggle,
         false);
@@ -39,9 +39,10 @@ chrome.storage.sync.get(
     (items) => {
         const keep_num_comments = items.num_comments;
         console.log("number comment to keep: ", keep_num_comments);
-        for (var i = 0; i < comment_time_links.length - keep_num_comments; i++) {
-            var item = comment_time_links[i];
-            var comment_contents = item.parentElement.parentElement.parentElement.parentElement.parentElement.querySelectorAll(".ak-renderer-wrapper");
+        console.log('number of conversation: ', conversation_blocks.length);
+        for (var i = 0; i < conversation_blocks.length - keep_num_comments; i++) {
+            var item = conversation_blocks[i];
+            var comment_contents = item.querySelectorAll(".ak-renderer-wrapper");
             for (var j = 0; j < comment_contents.length; j++) {
                 comment_contents[j].style.display = 'none';
             }
