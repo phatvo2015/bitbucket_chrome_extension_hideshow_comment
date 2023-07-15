@@ -6,12 +6,14 @@
   "author": "Phat Vo",
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "background": {
     "service_worker": "service-worker.js"
   },
   "action": {
     "default_title": "Action Button"
-  }
+  },
+  "options_page": "options.html"
 }
