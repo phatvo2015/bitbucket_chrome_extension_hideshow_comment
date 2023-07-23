@@ -39,7 +39,20 @@ for (var i = 0; i < conversation_blocks.length; i++) {
 
 }
 
+///////////////////////
 // Auto hide comments 
+//////////////////////
+
+// Unhide all comments
+for (var i = 0; i < conversation_blocks.length; i++) {
+    var item = conversation_blocks[i];
+    var comment_contents = item.querySelectorAll(".ak-renderer-wrapper");
+    for (var j = 0; j < comment_contents.length; j++) {
+        comment_contents[j].style.display = 'block';
+    }
+}
+
+// Start hiding
 chrome.storage.sync.get(
     { num_comments: 1 },
     (items) => {
