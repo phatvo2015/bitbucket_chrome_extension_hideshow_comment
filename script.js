@@ -10,7 +10,8 @@ function hideElement(element) {
 }
 
 function commentDisplayToggle() {
-    var comment_contents = this.querySelectorAll(".ak-renderer-wrapper");
+    var comment_card = this.parentElement.parentElement.parentElement;
+    var comment_contents = comment_card.querySelectorAll(".ak-renderer-wrapper");
     var first_content_display_status = comment_contents[0].style.display;
     for (var j = 0; j < comment_contents.length; j++) {
         if (first_content_display_status == "block") {
@@ -23,14 +24,19 @@ function commentDisplayToggle() {
 
 
 // Main program
-var conversation_blocks = document.querySelectorAll('div[style*="header"]');
+var conversation_blocks = document.querySelectorAll('section[data-qa="conversations-global-style"] div[style*="header"]');
 
 // Inject script to list click event when user clicks on timestamp of comment
 for (var i = 0; i < conversation_blocks.length; i++) {
-    conversation_blocks[i].addEventListener(
-        "click",
-        commentDisplayToggle,
-        false);
+
+    var timestamps = conversation_blocks[i].querySelectorAll('a[href*="comment"]');
+    for (var j = 0; j < timestamps.length; j++) {
+        timestamps[j].addEventListener(
+            "click",
+            commentDisplayToggle,
+            false);
+    }
+
 }
 
 // Auto hide comments 
