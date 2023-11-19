@@ -45,7 +45,7 @@ for (var i = 0; i < conversation_blocks.length; i++) {
 
     var commentButtons = conversation_blocks[i].querySelectorAll('button');
     for (var j = 0; j < commentButtons.length; j++) {
-        if (commentButtons[j].textContent == "Create task") {
+        if (commentButtons[j].textContent == "Like") {
             var buttonContainer = commentButtons[j].parentElement.parentElement.parentElement;
 
             if (buttonContainer.querySelector('button[extension-custom-created="true"]') == null) {
