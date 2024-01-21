@@ -21,8 +21,8 @@ function hideElement(element) {
 // }
 
 function commentDisplayToggle() {
-    var comment_card = this.parentElement.parentElement.parentElement;
-    var comment_contents = comment_card.querySelectorAll(".ak-renderer-wrapper");
+    var comment_card = this.parentElement.parentElement.parentElement.parentElement;
+    var comment_contents = comment_card.querySelectorAll(".is-comment");
     var first_content_display_status = comment_contents[0].style.display;
     for (var j = 0; j < comment_contents.length; j++) {
         if (first_content_display_status == "block") {
