@@ -9,17 +9,6 @@ function hideElement(element) {
     element.style.display = 'none';
 }
 
-// function copyClipboard() {
-//     const copyContent = async () => {
-//         try {
-//           await navigator.clipboard.writeText(text);
-//           console.log('Content copied to clipboard');
-//         } catch (err) {
-//           console.error('Failed to copy: ', err);
-//         }
-//       }
-// }
-
 function commentDisplayToggle() {
     var comment_card = this.parentElement.parentElement.parentElement.parentElement;
     var comment_contents = comment_card.querySelectorAll(".is-comment");
@@ -35,7 +24,9 @@ function commentDisplayToggle() {
 
 
 // Main program
-var conversation_blocks = document.querySelectorAll('section[data-qa="conversations-global-style"] div[style*="header"]');
+var conversation_blocks = document.querySelectorAll('div.ak-renderer-document');
+
+var conversation_blocks = document.querySelectorAll('div[data-qa=pull-request-overview-activity-content]')
 
 // Inject script to list click event when user clicks on timestamp of comment
 for (var i = 0; i < conversation_blocks.length; i++) {
@@ -49,9 +40,9 @@ for (var i = 0; i < conversation_blocks.length; i++) {
             var buttonContainer = commentButtons[j].parentElement.parentElement.parentElement;
 
             if (buttonContainer.querySelector('button[extension-custom-created="true"]') == null) {
-                var copyButtonDiv = commentButtons[j].parentElement.parentElement.cloneNode(true);
+                var copyButtonDiv = commentButtons[j].parentElement.parentElement.querySelector("span").cloneNode(true);
                 var copyButton = copyButtonDiv.querySelector("button");
-                copyButton.textContent = "Copy to clipboard";
+                copyButton.textContent = "! Copy to clipboard";
                 copyButton.setAttribute("extension-custom-created", "true")
 
                 copyButton.onclick = function () {
@@ -61,7 +52,7 @@ for (var i = 0; i < conversation_blocks.length; i++) {
                         console.log("Link copied to clipboard: " + text);
                     });
                 };
-                buttonContainer.insertBefore(copyButtonDiv, buttonContainer.firstChild);
+                commentButtons[j].insertAdjacentElement('afterEnd',copyButtonDiv);
             }
         }
 
