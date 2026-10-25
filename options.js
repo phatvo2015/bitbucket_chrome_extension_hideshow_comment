@@ -1,6 +1,9 @@
 // Saves options to chrome.storage
 const saveOptions = () => {
-  const num_comments = document.getElementById('num_comments').value;
+  const input = document.getElementById('num_comments');
+  const parsed = parseInt(input.value, 10);
+  const num_comments = Number.isNaN(parsed) || parsed < 0 ? 1 : parsed;
+  input.value = num_comments;
 
   chrome.storage.sync.set(
     { num_comments: num_comments },
@@ -21,7 +24,9 @@ const restoreOptions = () => {
   chrome.storage.sync.get(
     { num_comments: 1 },
     (items) => {
-      document.getElementById('num_comments').value = items.num_comments;
+      const parsed = parseInt(items.num_comments, 10);
+      document.getElementById('num_comments').value =
+        Number.isNaN(parsed) || parsed < 0 ? 1 : parsed;
     }
   );
 };
